@@ -8,7 +8,7 @@ from carzApis.models import UserModle
 class UserType(DjangoObjectType):
     class Meta:
         model = UserModle
-        fields = ("id", "name")
+        fields = ("id", "name", "email")
 
 
 class GetUserByIdMutation(graphene.Mutation):
@@ -58,12 +58,12 @@ class UpdateUserMutation(graphene.Mutation):
 class CreatUserMutation(graphene.Mutation):
     class Arguments:
         name = graphene.String()
-    
+        email =graphene.String()
     user = graphene.Field(UserType)    
     
     @classmethod
-    def mutate(cls, root, info, name):
-        user = UserModle(name=name)
+    def mutate(cls, root, info, name, email):
+        user = UserModle(name=name , email=email)
         user.save()
         return cls(user=user)
           
