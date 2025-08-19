@@ -1,14 +1,11 @@
 import graphene
-from django.db import models
 from graphene_django import DjangoObjectType
-from carzApis.models import UserModle
+from carzApis.models.user_model import UserModle
+from carzApis.object_types.user_type import UserType
 
     
 
-class UserType(DjangoObjectType):
-    class Meta:
-        model = UserModle
-        fields = ("id", "name", "email")
+
 
 
 
