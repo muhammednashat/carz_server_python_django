@@ -1,12 +1,12 @@
 import graphene
 from graphene_django import DjangoObjectType
-from carzApis.models.user_model import UserModle
-from carzApis.object_types.user_type import UserType
-
-    
+from carzApis.models import UserModle
 
 
-
+class UserType(DjangoObjectType):
+    class Meta:
+        model = UserModle
+        fields = ("id", "name", "email")
 
 
 class GetUserByIdMutation(graphene.Mutation):
@@ -110,4 +110,4 @@ class Query(graphene.ObjectType):
     def resolve_users(root, info):
         return UserModle.objects.all()
 
-schema = graphene.Schema(query=Query, mutation=Mutation)
+

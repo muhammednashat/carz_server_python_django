@@ -70,15 +70,16 @@ baseUrl = "https://raw.githubusercontent.com/muhammednashat/carz_images/main/"
 counter = 99  
 for i in range(115):
         counter +=  1 
+        brandName = random.choice(list(CarModel.BrandCar))
         CarModel(
+        brandImage = f'{baseUrl}{brandName}.png',    
         imgUrl = f'{baseUrl}{counter}.png',
         name=random.choice(car_names),
         description=random.choice(car_descriptions),
         car_type=random.choice(list(CarModel.CarType)),
         fuel_type=random.choice(list(CarModel.FuelType)),
-        brand=random.choice(list(CarModel.BrandCar)),
+        brand=brandName,
         transmission_options=random.choice(list(CarModel.TransmissionOptions)),
-        is_trend=random.choice([True, False]),
         is_popular=random.choice([True, False]),
         can_connect_bluetooth=random.choice([True, False]),
         is_automatic=random.choice([True, False]),

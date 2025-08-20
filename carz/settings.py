@@ -45,7 +45,7 @@ INSTALLED_APPS = [
      'graphene_django'
 ]
 GRAPHENE = {
-    "SCHEMA": "carzApis.schema.schema"
+    "SCHEMA": "carz.schema.schema"
 }
 
 MIDDLEWARE = [

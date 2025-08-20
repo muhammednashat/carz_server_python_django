@@ -1,6 +1,10 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+class BrandModel(models.Model):
+    name = models.CharField(max_length=100)
+    name_in_database = models.CharField(max_length=100)
+    imag_url = models.CharField(max_length=500)
 
 
 
@@ -26,16 +30,20 @@ class CarModel(models.Model):
         SPORTS = "spo", _("Sports Car")
     
     class BrandCar(models.TextChoices):
-        TOYOTA = "toy", _("Toyota")
+        
         HONDA = "hon", _("Honda")
-        FORD = "for", _("Ford")
-        BMW = "bmw", _("BMW")
-        MERCEDES = "mer", _("Mercedes-Benz")
-        AUDI = "aud", _("Audi")
         VOLKSWAGEN = "vw", _("Volkswagen")
-        HYUNDAI = "hyu", _("Hyundai")
+        BMW = "bmw", _("BMW")
+        AUDI = "aud", _("Audi")
         NISSAN = "nis", _("Nissan")
+        FORD = "for", _("Ford")
+        FRA ="fra",_("Farrari")
+        LAM = "lamb", _("Lamborghini")
+        MERCEDES = "mer", _("Mercedes")
         TESLA = "tes", _("Tesla")
+        TOYOTA = "toy", _("Toyota")
+        
+        HYUNDAI = "hyu", _("Hyundai")
         
     class TransmissionOptions(models.TextChoices):
         MANUAL = "man", _("Manual")
@@ -43,7 +51,7 @@ class CarModel(models.Model):
         SEMI_AUTOMATIC = "sem", _("Semi-Automatic")
         CVT = "cvt", _("CVT")  
         DCT = "dct", _("Dual-Clutch Transmission")   
-        
+    brandImage = models.CharField(max_length=500 , default="")    
     imgUrl = models.CharField(max_length=500, default= "") 
     name = models.CharField(max_length=200)
     price = models.IntegerField()
@@ -62,7 +70,7 @@ class CarModel(models.Model):
         )
     
     
-    is_trend = models.BooleanField(default=False)
+  
     is_popular = models.BooleanField(default=False)  
     can_connect_bluetooth = models.BooleanField(default=False)
     is_automatic = models.BooleanField(default=False)

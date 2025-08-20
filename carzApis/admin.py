@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from carzApis.models.user_model import  UserProfile , UserModle
+from carzApis.models import UserModle, UserProfile
+
 # Register your models here.
 admin.site.register(UserProfile)
 admin.site.register(UserModle)
