@@ -1,10 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-class BrandModel(models.Model):
-    name = models.CharField(max_length=100)
-    name_in_database = models.CharField(max_length=100)
-    imag_url = models.CharField(max_length=500)
 
 
 
@@ -42,7 +38,6 @@ class CarModel(models.Model):
         MERCEDES = "mer", _("Mercedes")
         TESLA = "tes", _("Tesla")
         TOYOTA = "toy", _("Toyota")
-        
         HYUNDAI = "hyu", _("Hyundai")
         
     class TransmissionOptions(models.TextChoices):
@@ -68,11 +63,12 @@ class CarModel(models.Model):
         choices=FuelType,
         default=FuelType.PETROL
         )
-    
-    
   
     is_popular = models.BooleanField(default=False)  
     can_connect_bluetooth = models.BooleanField(default=False)
     is_automatic = models.BooleanField(default=False)
 
-
+class BrandModel(models.Model):
+    name = models.CharField(max_length=100)
+    name_in_database = models.CharField(max_length=100)
+    imag_url = models.CharField(max_length=500)
