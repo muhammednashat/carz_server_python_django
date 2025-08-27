@@ -71,4 +71,5 @@ class CarModel(models.Model):
 class BrandModel(models.Model):
     name = models.CharField(max_length=100)
     name_in_database = models.CharField(max_length=100)
-    imag_url = models.CharField(max_length=500)
+    image_url = models.CharField(max_length=500)
+    numbers = models.IntegerField(default=42) 

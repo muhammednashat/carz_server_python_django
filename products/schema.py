@@ -16,16 +16,15 @@ class CarType(DjangoObjectType):
         
 class Query(graphene.ObjectType):
     populars = graphene.List(CarType)
-    rending_brands = graphene.List(CarType)
+    trending_brands = graphene.List(CarType)
     cars_by_brand = graphene.List(CarType, brand = graphene.String())
     car_brands = graphene.List(BrandType)
-    
     
     def resolve_populars(root, info):
         cars = CarModel.objects.all().filter( is_popular = True)
         return cars 
 
-    def resolve_rending_brands(root,info):
+    def resolve_trending_brands(root,info):
         return CarModel.objects.filter(brand__in = ["hon","for" , "aud","tes","fra",])
              
     def resolve_cars_by_brand(root,info,brand):
