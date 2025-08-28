@@ -1,28 +1,50 @@
 import graphene
-from models import BookingModel
+
 from graphene_django import DjangoObjectType
+
+from booking.models import BookingModel
+from carzApis.models import UserModel
 
 class BookingType(DjangoObjectType):
     class Meta:
         model = BookingModel
         fields ="__all__"
+
+class Query(graphene.ObjectType):
+    
+    user_bookings = graphene.List(BookingType, user_id = graphene.ID())
+    
+    def resolve_user_bookings(root, info, user_id):
+        user = UserModel.objects.get(pk= user_id)
+        bookings = BookingModel.objects.all().filter(user = user)
         
+        return bookings
+       
 
 class BookingMutaion(graphene.Mutation):
     class Arguments:
         card_number = graphene.String()
         address = graphene.String()
-        user = graphene.ID()
+        user_id = graphene.ID()
         car = graphene.String()
-        date = graphene.Date()
-        time = graphene.Time()
-    status = graphene.Boolean
+        # date = graphene.String()
+        # time = graphene.String()
+        
+    status = graphene.String()
        
     @classmethod
-    def mutate(cls, root, info, card_number,address,user,car,date,time):
+    def mutate(cls, root, info, card_number,address,car, user_id):
+        try:    
+          user = UserModel.objects.get(pk = user_id)
+          booking = BookingModel(address = address ,car= car,card_number = card_number,user = user)
+          booking.save()
+          status = ""
+        except  Exception as ee:
+          print(str(ee))             
+          status = str(ee)
+        return cls(status = status)  
         
-      pass
         
 class Mutation(graphene.ObjectType):
-     pass
+     booking = BookingMutaion.Field()
                 

@@ -1,7 +1,7 @@
 from django.db import models
     
  
-class UserModle(models.Model):
+class UserModel(models.Model):
     name = models.CharField(max_length=250)
     email = models.EmailField(unique= True, null = True)
     

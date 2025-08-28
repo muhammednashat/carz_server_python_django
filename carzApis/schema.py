@@ -1,11 +1,11 @@
 import graphene
 from graphene_django import DjangoObjectType
-from carzApis.models import UserModle
+from carzApis.models import UserModel
 
 
 class UserType(DjangoObjectType):
     class Meta:
-        model = UserModle
+        model = UserModel
         fields = ("id", "name", "email")
 
 
@@ -16,7 +16,7 @@ class GetUserByIdMutation(graphene.Mutation):
     
     @classmethod
     def mutate(cls,root,info,id):
-        user = UserModle.objects.get(id=id)
+        user = UserModel.objects.get(id=id)
         return cls(user = user)
         
             
@@ -29,7 +29,7 @@ class DeletUserMutatoion(graphene.Mutation):
     @classmethod
     def mutate(cls,root,info,id):
         try: 
-           user = UserModle.objects.get(id= id)
+           user = UserModel.objects.get(id= id)
            user.delete()
            status = True
            return cls(status = status)  
@@ -46,7 +46,7 @@ class UpdateUserMutation(graphene.Mutation):
     
     @classmethod
     def mutate(cls,root,inf,name, id):
-       user = UserModle.objects.get(id = id)
+       user = UserModel.objects.get(id = id)
        user.name = name
        user.save()
        return cls(user = user)
@@ -63,7 +63,7 @@ class SignInMutation(graphene.Mutation):
     @classmethod
     def mutate(cls,root, info, email, lang):
         try:
-           user = UserModle.objects.all().get(email = email)
+           user = UserModel.objects.all().get(email = email)
            if(user):
               print("of")  
               return cls(status = True , msg = "ok", user = user)
@@ -85,7 +85,7 @@ class CreatUserMutation(graphene.Mutation):
     
     @classmethod
     def mutate(cls, root, info, name, email):
-        user = UserModle(name=name , email=email)
+        user = UserModel(name=name , email=email)
         user.save()
         return cls(user=user)
           
@@ -103,11 +103,11 @@ class Query(graphene.ObjectType):
     
     def resolve_sign_in(root, inf, email):
         print(f"signIn => {email}")
-        user = UserModle.objects.all().get(email = email)
+        user = UserModel.objects.all().get(email = email)
         print(f"user {user}")
         return user
         
     def resolve_users(root, info):
-        return UserModle.objects.all()
+        return UserModel.objects.all()
 
 
