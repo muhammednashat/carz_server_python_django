@@ -25,15 +25,15 @@ class BookingMutaion(graphene.Mutation):
     class Arguments:
         card_number = graphene.String()
         address = graphene.String()
-        user_id = graphene.ID()
+        user_id = graphene.String()
         car = graphene.String()
-        # date = graphene.String()
-        # time = graphene.String()
+        date = graphene.String()
+        time = graphene.String()
         
     status = graphene.String()
        
     @classmethod
-    def mutate(cls, root, info, card_number,address,car, user_id):
+    def mutate(cls, root, info, card_number,address,car, user_id, date, time):
         try:    
           user = UserModel.objects.get(pk = user_id)
           booking = BookingModel(address = address ,car= car,card_number = card_number,user = user)
