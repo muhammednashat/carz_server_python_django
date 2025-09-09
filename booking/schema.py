@@ -12,9 +12,10 @@ class BookingType(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     
-    user_bookings = graphene.List(BookingType, user_id = graphene.ID())
+    user_bookings = graphene.List(BookingType, user_id = graphene.String())
     
     def resolve_user_bookings(root, info, user_id):
+        print(f"Called ========== {user_id} ===")
         user = UserModel.objects.get(pk= user_id)
         bookings = BookingModel.objects.all().filter(user = user)
         
@@ -36,7 +37,7 @@ class BookingMutaion(graphene.Mutation):
     def mutate(cls, root, info, card_number,address,car, user_id, date, time):
         try:    
           user = UserModel.objects.get(pk = user_id)
-          booking = BookingModel(address = address ,car= car,card_number = card_number,user = user)
+          booking = BookingModel(address = address ,car= car,card_number = card_number,user = user, date= date, time=time)
           booking.save()
           status = ""
         except  Exception as ee:

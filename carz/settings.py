@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'user.apps.UserConfig',
     'carzApis.apps.CarzapisConfig',
     'products.apps.ProductsConfig',
     'booking.apps.BookingConfig',
