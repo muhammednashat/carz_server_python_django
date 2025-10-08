@@ -11,6 +11,8 @@ class BookingModel(models.Model):
         UserModel,
         default= '',
         on_delete= models.CASCADE, 
-        related_name= 'bookings')
+        related_name= 'bookings'
+        
+        )
     car = models.CharField(max_length=200)
     
